@@ -1,1 +1,2 @@
-# pokemon-pokedex-react
+# Pokemon Pokedex
+Coming soon...
