@@ -40,11 +40,7 @@ export default function Searchbar(props) {
           <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         </div>
       ) : (
-        <div className="pokemon-container">
-          <div className="pokemon-name">
             <h1>No Pokemon Found</h1>
-          </div>
-        </div>
       ) }
     </div>
   );

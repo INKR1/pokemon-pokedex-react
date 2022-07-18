@@ -1,16 +1,16 @@
 import React from 'react';
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Pokedex from './components/Pokedex';
 import Searchbar from "./components/Searchbar";
 
 function App() {
 
   return (
-    <div>
+    <div className="App">
       <Navbar />
       <Searchbar />
-      <div className="App">
-      </div>
+      <Pokedex />
     </div>
   );
 }
