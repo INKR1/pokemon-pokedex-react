@@ -1,12 +1,18 @@
-import './App.css';
-import Navbar from './components/Navbar';
-import Searchbar from './components/Searchbar';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import Searchbar from "./components/Searchbar";
+import { searchForPokemon } from "./data/api.js";
 
 function App() {
+
+  const onSearchHandler = (pokemonName) => {
+    console.log("pokemon ", pokemonName)
+  }
+
   return (
     <div>
       <Navbar />
-      <Searchbar />
+      <Searchbar onSearch={onSearchHandler}/>
       <div className="App">
         <h1>Pikachu!</h1>
       </div>
@@ -15,4 +21,3 @@ function App() {
 }
 
 export default App;
- 

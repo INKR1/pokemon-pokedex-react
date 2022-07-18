@@ -1,26 +1,30 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
 
-export default function Searchbar() {
-const [search, setSearch] = useState("dito")
+export default function Searchbar(props) {
+  const { onSearch } = props;
+  const [search, setSearch] = useState("dito");
 
-    const onChangeHandler = (e) => {
-        setSearch(e.target.value);
-    }
+  const onChangeHandler = (e) => {
+    setSearch(e.target.value);
+  };
 
-    const buttonClickHandler = (e) => {
-        e.preventDefault();
-        console.log(search);
-        
-    }
+  const buttonClickHandler = (e) => {
+    e.preventDefault();
+    onSearch(search);
+  };
   return (
     <div className="searchbar-container">
       <div className="searchbar">
-        <input type="text" placeholder="Search for a Pokemon" onChange={onChangeHandler}/>
+        <input
+          type="text"
+          placeholder="Search for a Pokemon"
+          onChange={onChangeHandler}
+        />
       </div>
       <div className="searchbar-button">
         <button onClick={buttonClickHandler}>Search</button>
       </div>
     </div>
-  )
+  );
 }
