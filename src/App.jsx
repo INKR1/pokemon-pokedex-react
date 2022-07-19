@@ -15,8 +15,11 @@ function App() {
   const fetchPokemons = async () => {
     try {
       setLoading(true);
-      const result = await getPokemons();
-      const data = await result.json();
+      const data = await getPokemons();
+      const promises = data.results.map(async (pokemon) => 
+        await getPokemons(pokemon.url)
+      );
+      const results = Promise.all(promises);
       setPokemon(data.results);
       setLoading(false);
     } catch (error) {
