@@ -1,8 +1,8 @@
 import React from "react";
 import Pokemon from "./Pokemon";
 
-export default function Pokedex(props) {
-  const { pokemons, loading } = props;
+export default function Pokedex({pokemons, loading}) {
+  console.log("all pokemons ", pokemons)
   return (
     <div>
       <div className="pokedex-header">
@@ -14,12 +14,13 @@ export default function Pokedex(props) {
       ) : (
         <div className="pokedex-grid">
           {pokemons &&
-            pokemons.map((pokemon) => (
-              <Pokemon key={pokemon.id} pokemon={pokemon} />
-            ))}
+            pokemons.map((pokemon, index) => {
+              return (
+                <Pokemon key={index} pokemon={pokemon} />
+              );
+            })}
         </div>
       )}
     </div>
   );
-}
- 
+};
