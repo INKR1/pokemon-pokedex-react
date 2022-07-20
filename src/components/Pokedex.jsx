@@ -1,7 +1,7 @@
 import React from "react";
+import Pokemon from "./Pokemon";
 
 export default function Pokedex(props) {
-
   const { pokemons, loading } = props;
   return (
     <div>
@@ -11,17 +11,15 @@ export default function Pokedex(props) {
       </div>
       {loading ? (
         <div>Loading the pokemons...</div>
-      ): (
+      ) : (
         <div className="pokedex-grid">
-          {pokemons.map((pokemon, index) => (
-            <div className="pokemon-card" key={index}>
-              <div> # {pokemon.id} </div>
-              <div> Name:{pokemon.name} </div>
-              <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            </div>
-          ))}
-          </div>
+          {pokemons &&
+            pokemons.map((pokemon) => (
+              <Pokemon key={pokemon.id} pokemon={pokemon} />
+            ))}
+        </div>
       )}
-      </div>
+    </div>
   );
 }
+ 
