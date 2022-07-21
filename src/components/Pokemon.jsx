@@ -25,6 +25,12 @@ export default function Pokemon({ pokemon }) {
               );
             })}
           </div>
+            <svg className="pokeball">
+              <use xlinkHref="#likedPokeball"></use>
+            </svg>
+            <svg className="pokeball">
+              <use xlinkHref="#pokeball"></use>
+            </svg>
           <button className="liked-pokemon-btn">I like it</button>
         </div>
       </div>

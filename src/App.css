@@ -68,3 +68,25 @@ nav {
     gap: 10px;
     grid-template-columns: repeat(3, 1fr);
 }
+svg.pokeball{
+    width: 30px;
+    height: 30px;
+}
+.pokeball-top{
+    fill: red;
+    color: red;
+    stroke: black;
+    stroke-width: 2;
+
+}
+.pokeball-bottom{
+    fill: white;
+    stroke: black;
+    stroke-width: 2;
+}
+
+.circle {
+    fill: #ffffff;
+    stroke: #000000;
+    stroke-width: 2px;
+}
