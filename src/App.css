@@ -146,3 +146,20 @@ svg.pokeball {
   stroke: #000000;
   stroke-width: 2px;
 }
+
+.pages-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: transparent;
+}  
+.arrow {
+    width: 20px;
+    height: 20px;
+    fill: #98a4b3;
+    cursor: pointer;
+  }
+  
+  .arrow-left{
+    transform: rotate(180deg);
+  }
