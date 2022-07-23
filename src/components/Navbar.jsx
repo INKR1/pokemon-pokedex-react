@@ -7,6 +7,11 @@ export default function Navbar() {
       <div>
         <img src={logoImg} alt="Pokemon-logo" className="navbar-img" />
       </div>
+      <div>
+        <svg className="pokeball">
+          <use xlinkHref="#likedPokeball"></use>
+        </svg>
+      </div>
     </nav>
   );
 }
