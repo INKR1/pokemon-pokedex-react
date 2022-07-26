@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Pokedex from "./components/Pokedex";
 import Searchbar from "./components/Searchbar";
-import { searchForPokemon, getPokemons, getPokemonData } from "./data/api";
+import { getPokemons, getPokemonData } from "./data/api";
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [likes, setLikes] = useState(new Set());
+  const change = useRef(false);
+  const loaded = useRef(false);
 
-  const pokemonsPerPage = 30; 
+  const pokemonsPerPage = 15; 
 
   const fetchPokemons = async () => {
     try {
@@ -30,9 +34,32 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("loaded");
     fetchPokemons();
   }, [page]);
+
+  useEffect(() => {
+    let l = localStorage.getItem('pokemonsLikes');
+    if (null === l) {
+        l = JSON.stringify([]);
+    }
+    l = JSON.parse(l);
+    setLikes(new Set(l));
+}, []);
+
+useEffect(() => {
+    if (loaded.current) {
+        localStorage.setItem('pokemonsLikes', JSON.stringify([...likes]));
+    }
+    loaded.current = true;
+}, [likes]);
+
+
+  const likeButtonPressed = id => {
+    change.current = true;
+    const likesCopy = new Set(likes); 
+    likesCopy.has(id) ? likesCopy.delete(id) : likesCopy.add(id);
+    setLikes(likesCopy);
+ }
 
 
   return (
@@ -42,9 +69,11 @@ function App() {
       <Pokedex 
         pokemons={pokemons} 
         loading={loading} 
-        page={page}
         setPage={setPage}
+        page={page}
         totalPages={totalPages}
+        likeButtonPressed={likeButtonPressed}
+        likes={likes}
       />
     </div>
   );
