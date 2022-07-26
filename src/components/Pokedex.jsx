@@ -8,6 +8,8 @@ export default function Pokedex({
   page,
   setPage,
   totalPages,
+  likeButtonPressed,
+  likes
 }) {
   const clickedLeftHandler = () => {
     if (page > 0) {
@@ -37,9 +39,14 @@ export default function Pokedex({
       ) : (
         <div className="pokedex-grid">
           {pokemons &&
-            pokemons.map((pokemon, index) => {
-              return <Pokemon key={index} pokemon={pokemon} />;
-            })}
+            pokemons.map((p) => (
+                <Pokemon 
+                key={p.id} 
+                pokemon={p} 
+                like={likes.has(p.id)}
+                likeButtonPressed={likeButtonPressed}
+                />
+            ))}
         </div>
       )}
     </div>
