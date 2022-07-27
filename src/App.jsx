@@ -15,7 +15,7 @@ function App() {
   const change = useRef(false);
   const loaded = useRef(false);
 
-  const pokemonsPerPage = 15; 
+  const pokemonsPerPage = 21; 
 
   const fetchPokemons = async () => {
     try {
