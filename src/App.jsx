@@ -7,13 +7,16 @@ import Searchbar from "./components/Searchbar";
 import { getPokemons, getPokemonData } from "./data/api";
 
 function App() {
+
   const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
   const [likes, setLikes] = useState(new Set());
   const change = useRef(false);
+ 
+  const [loading, setLoading] = useState(false);
   const loaded = useRef(false);
+
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const pokemonsPerPage = 21; 
 
