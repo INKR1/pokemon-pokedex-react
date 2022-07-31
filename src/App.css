@@ -39,11 +39,19 @@ nav {
   }
 }
 
-.searchbar-container {
-  display: flex;
+.searchbar-wrapper {
+  /* display: flex;
   margin: 0 auto;
   padding: 0 20px;
+  align-items: center; */
+  padding: 10px 30px;
+  display: flex;
   align-items: center;
+  
+}
+.searchbar-left{
+  flex: 1;
+  display: flex;
 }
 .searchbar {
   background-color: white;
@@ -63,6 +71,18 @@ nav {
   color: white;
   padding: 10px 17px;
   cursor: pointer;
+}
+.searchbar-right{
+  flex: 1;
+  display: flex;
+}
+/* .pokemon-wrapper {
+  justify-content: center;
+  right: 200px;
+} */
+.pokemon-container span {
+  text-transform: capitalize;
+  font-size: 800;
 }
 
 /* LOADER */
