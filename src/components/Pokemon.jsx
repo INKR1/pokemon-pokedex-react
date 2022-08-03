@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Pokemon({ pokemon, like, likeButtonPressed }) {
   return (
     <div className="pokemon-card">
