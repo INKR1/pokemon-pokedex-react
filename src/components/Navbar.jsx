@@ -1,6 +1,6 @@
 export default function Navbar( { likes }) {
 
-  const favorites = [];
+  const favorites = []; 
 
 
   const logoImg = "https://sg.portal-pokemon.com/img/common/logo.png";
@@ -13,7 +13,8 @@ export default function Navbar( { likes }) {
 
   likes.forEach(likedPokemons);
 
-  console.log("favorites pokemons nr.: " + favorites);
+  console.log("favorites pokemons ID nr.: " + favorites);
+
   return (
     <nav>
       <div>
