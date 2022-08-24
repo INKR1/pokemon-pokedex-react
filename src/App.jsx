@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Pokedex from "./components/Pokedex";
 import Searchbar from "./components/Searchbar";
 import { getPokemons, getPokemonData } from "./data/api";
+import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
@@ -71,17 +72,20 @@ function App() {
 
   return (
       <div className="App">
-        <Navbar likes={likes}/>
-        <Searchbar />
-        <Pokedex
-          pokemons={pokemons}
-          loading={loading}
-          setPage={setPage}
-          page={page}
-          totalPages={totalPages}
-          likeButtonPressed={likeButtonPressed}
-          likes={likes}
-        /> 
+        <Routes>
+          <Route path="/" element={ <Navbar likes={likes}/>} />
+          {/* <Navbar likes={likes}/> */}
+          <Route path="/search" element={<Searchbar />} />
+          <Route path="/pokedex" element={<Pokedex
+            pokemons={pokemons}
+            loading={loading}
+            setPage={setPage}
+            page={page}
+            totalPages={totalPages}
+            likeButtonPressed={likeButtonPressed}
+            likes={likes}
+          /> } />
+        </Routes>
       </div>
   );
 }
