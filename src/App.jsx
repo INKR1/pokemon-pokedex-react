@@ -2,10 +2,11 @@
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Pokedex from "./components/Pokedex";
+import Pokedex from "./pages/Pokedex";
 import Searchbar from "./components/Searchbar";
 import { getPokemons, getPokemonData } from "./data/api";
 import { Route, Routes } from 'react-router-dom';
+import Layout from "./components/layout/Layout";
 
 
 function App() {
@@ -72,20 +73,21 @@ function App() {
 
   return (
       <div className="App">
-        <Routes>
-          <Route path="/" element={ <Navbar likes={likes}/>} />
-          {/* <Navbar likes={likes}/> */}
-          <Route path="/search" element={<Searchbar />} />
-          <Route path="/pokedex" element={<Pokedex
-            pokemons={pokemons}
-            loading={loading}
-            setPage={setPage}
-            page={page}
-            totalPages={totalPages}
-            likeButtonPressed={likeButtonPressed}
-            likes={likes}
-          /> } />
-        </Routes>
+        <Layout> 
+          <Routes>
+              <Route path="/" element={<Navbar likes={likes} />} />
+              <Route path="/search" element={<Searchbar />} />
+              <Route path="/pokedex" element={<Pokedex
+                pokemons={pokemons}
+                loading={loading}
+                setPage={setPage}
+                page={page}
+                totalPages={totalPages}
+                likeButtonPressed={likeButtonPressed}
+                likes={likes}
+              /> } />
+          </Routes>
+        </Layout>
       </div>
   );
 }
