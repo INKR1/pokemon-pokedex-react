@@ -1,7 +1,10 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import "../../App.css"
 
 import  FavoritesContext  from '../../contexts/favPokemonContext';
+
+const logoImg = "https://sg.portal-pokemon.com/img/common/logo.png";
 
 export default function MainNavigation() {
 
@@ -9,7 +12,7 @@ export default function MainNavigation() {
   return (
     <div className='header'>
         <div className='logo'> 
-            <Link to="/">pokemon!!!</Link>
+            <Link to="/">  <img src={logoImg} alt="Pokemon-logo" className="navbar-img" /></Link>
         </div>
         <nav>
             <ul>
@@ -24,7 +27,9 @@ export default function MainNavigation() {
                 </li>
                 <li>
                     <Link to="/favorites">
-                        My Favorites
+                    <svg className="total-fav-pokemons">
+                        <use xlinkHref="#likedPokeball"></use>
+                    </svg>
                         <span className='badge'>{favCtx.totalFavorites}</span>
                     </Link>
                 </li>
