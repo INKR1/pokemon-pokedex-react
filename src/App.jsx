@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Favorites from "./components/Favorites";
 import Pokedex from "./pages/Pokedex";
 import Searchbar from "./components/Searchbar";
 import { getPokemons, getPokemonData } from "./data/api";
 import { Route, Routes } from 'react-router-dom';
 import Layout from "./components/layout/Layout";
+import About from "./pages/About";
 
 
 function App() {
@@ -58,24 +59,12 @@ function App() {
     loaded.current = true;
   }, [likes]);
 
-  const likeButtonPressed = (id) => {
-    change.current = true;
-    const likesCopy = new Set(likes);
-    likesCopy.has(id) ? likesCopy.delete(id) : likesCopy.add(id);
-    setLikes(likesCopy);
-  };
-
-  // const addToFavorites = (id) => {
-  //   const favoritesCopy = [...favorites];
-  //   favoritesCopy.push(id);
-  //   setFavorites(favoritesCopy);
-  // }
 
   return (
       <div className="App">
         <Layout> 
           <Routes>
-              <Route path="/" element={<Navbar likes={likes} />} />
+              <Route path="/" element={ <About /> } />
               <Route path="/search" element={<Searchbar />} />
               <Route path="/pokedex" element={<Pokedex
                 pokemons={pokemons}
@@ -83,10 +72,12 @@ function App() {
                 setPage={setPage}
                 page={page}
                 totalPages={totalPages}
-                likeButtonPressed={likeButtonPressed}
-                likes={likes}
+                // likeButtonPressed={likeButtonPressed}
+                // likes={likes}
               /> } />
+              <Route path="/favorites" element={<Favorites/>} />
           </Routes>
+          
         </Layout>
       </div>
   );

@@ -7,9 +7,7 @@ export default function Pokedex({
   loading,
   page,
   setPage,
-  totalPages,
-  likeButtonPressed,
-  likes
+  totalPages
 }) {
   const clickedLeftHandler = () => {
     if (page > 0) {
@@ -43,8 +41,6 @@ export default function Pokedex({
                 <Pokemon 
                 key={p.id} 
                 pokemon={p} 
-                like={likes.has(p.id)}
-                likeButtonPressed={likeButtonPressed}
                 />
             ))}
         </div>
