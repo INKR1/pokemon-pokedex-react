@@ -3,7 +3,7 @@ import { useState } from "react";
 import { searchForPokemon } from "../data/api.js";
 
 export default function Searchbar(props) {
-  const [search, setSearch] = useState("dito");
+  const [search, setSearch] = useState("ditto");
   const [pokemon, setPokemon] = useState();
   const [pokemonId, setPokemonId] = useState();
 
