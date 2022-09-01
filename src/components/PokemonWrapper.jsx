@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import Card from "../components/ui/Card"
+import Card from "./ui/Card"
 import FavoritesContext from "../contexts/favPokemonContext";
 
 export default function Pokemon({ pokemon }) {
