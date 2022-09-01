@@ -1,10 +1,9 @@
 import { useContext } from "react";
+
 import FavoritesContext from "../contexts/favPokemonContext"
-import Pokemon from "../components/Pokemon"
+import Pokemon from "../components/PokemonWrapper"
 
 export default function Favorites() {
-
-  // const favorites = []; 
 
   const favCtx = useContext(FavoritesContext);
 
@@ -16,13 +15,6 @@ export default function Favorites() {
     content = <Pokemon favorites={favCtx.favorites} />
 
   }
-  
-//  const likedPokemons = function(
-//   likedPoki) {
-//     favorites.push(likedPoki);
-//   };
-
-//   likes.forEach(likedPokemons);
 
   // console.log("favorites pokemons ID nr.: " + favorites);
 
@@ -31,14 +23,5 @@ export default function Favorites() {
       <h1>My Favorites</h1>
         {content}
     </div>
-    
-    // <nav>
-    //   <div>
-    //     <span>{favorites.length}</span>
-    //     <svg className="total-fav-pokemons">
-    //       <use xlinkHref="#likedPokeball"></use>
-    //     </svg>
-    //   </div>
-    // </nav>
   );
 }
