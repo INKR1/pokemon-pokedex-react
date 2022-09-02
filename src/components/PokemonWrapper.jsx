@@ -1,51 +1,51 @@
 import { useContext } from "react";
-
-import Card from "./ui/Card"
 import FavoritesContext from "../contexts/favPokemonContext";
 
-export default function Pokemon({ pokemon }) {
+export default function PokemonWrapper(props) {
   
   const favCtx = useContext(FavoritesContext);
 
-  const pokemonIsFav = favCtx.pokemonIsFavorite(pokemon.id);
+  const pokemonIsFav = favCtx.pokemonIsFavorite(props.id);
 
   function toggleFavStatus() {
     if (pokemonIsFav) {
-      favCtx.removeFromFavorites(pokemon.id);
+      favCtx.removeFromFavorites(props.id);
     } else {
       favCtx.addToFavorite({
-        id: pokemon.id,
-        name: pokemon.name,
-        type: pokemon.type,
-        img: pokemon.sprites.front_default
+        id: props.id,
+        name: props.name,
+        type: props.type,
+        // img: props.sprites.front_default
       });
     }
   }
   
   return (
     <div className="pokemon-card">
-      <Card> 
         <div className="pokemon-img-container">
           <img
-            alt={pokemon.name}
-            src={pokemon.sprites.front_default}
+            alt={props.name}
+            // src={props.sprites.front_default}
             className="pokemon-img"
           />
         </div>
         <div className="card-body">
           <div className="card-top">
-            <h3>{pokemon.name}</h3>
-            <div># {pokemon.id} </div>
+            <h3>{props.name}</h3>
+            <div># {props.id} </div>
           </div>
           <div className="card-bottom">
             <div className="pokemon-type">
-              {pokemon.types.map((type, index) => {
+            <div className="pokemon-type-item">
+                    {props.type}
+                  </div>
+              {/* {props.types.map((type, id) => {
                 return (
-                  <div className="pokemon-type-item" key={index}>
+                  <div className="pokemon-type-item" key={id}>
                     {type.type.name}
                   </div>
                 );
-              })}
+              })} */}
             </div>
             <svg
               className="pokeball"
@@ -55,7 +55,6 @@ export default function Pokemon({ pokemon }) {
             </svg>
           </div>
         </div>
-      </Card>
     </div>
   );
 }
