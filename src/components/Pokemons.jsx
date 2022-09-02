@@ -3,13 +3,13 @@ import PokemonWrapper from "./PokemonWrapper"
 export default function Pokemons(props) {
     return (
         <ul className="pokemon-list">
-            {props.pokemon.map(p => (
+            {props.pokemons.map(pokemon => (
                 <PokemonWrapper
-                key={p.id}
-                id={p.id}
-                name={p.name}
-                type={p.type}
-                img={p.sprites.front_default}
+                key={pokemon.id}
+                id={pokemon.id}
+                name={pokemon.name}
+                type={pokemon.type}
+                // img={pokemon.sprites.front_default}
                 />
             ))}
         </ul>
