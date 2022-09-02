@@ -53,7 +53,7 @@ export default function Searchbar(props) {
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
           </div>
         ) : (
-          <h1> :)</h1>
+          <h1> Oops.... Can't find that pokemon 🥺</h1>
         )}
       </div>
     </div>
