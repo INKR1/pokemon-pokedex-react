@@ -8,8 +8,12 @@ export default function Pokemons(props) {
                 key={pokemon.id}
                 id={pokemon.id}
                 name={pokemon.name}
-                type={pokemon.type}
-                // img={pokemon.sprites.front_default}
+                types={pokemon.types}
+                img={pokemon.sprites.front_default}
+                
+                // img={pokemon.sprites.versions.generation_v.black_white.animated.front_default}
+                temp={pokemon}
+                imgShiny={pokemon.sprites.front_shiny}
                 />
             ))}
         </ul>

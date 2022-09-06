@@ -6,16 +6,18 @@ export default function PokemonWrapper(props) {
   const favCtx = useContext(FavoritesContext);
 
   const pokemonIsFav = favCtx.pokemonIsFavorite(props.id);
-
+  
   function toggleFavStatus() {
     if (pokemonIsFav) {
       favCtx.removeFromFavorites(props.id);
     } else {
-      favCtx.addToFavorite({
+      favCtx.addToFavorites({
         id: props.id,
         name: props.name,
         type: props.type,
-        // img: props.sprites.front_default
+        // img: props.sprites
+        img: props.sprites.front_default,
+        // img2: props.sprites.front_shiny
       });
     }
   }
@@ -25,9 +27,15 @@ export default function PokemonWrapper(props) {
         <div className="pokemon-img-container">
           <img
             alt={props.name}
-            // src={props.sprites.front_default}
+            // src={props.sprites}
+            src={props.img}
             className="pokemon-img"
           />
+      </div>
+      <div>
+          <img src={props.imgShiny} 
+          alt={props.name} 
+          className="pokemon-img"/>
         </div>
         <div className="card-body">
           <div className="card-top">
@@ -37,15 +45,15 @@ export default function PokemonWrapper(props) {
           <div className="card-bottom">
             <div className="pokemon-type">
             <div className="pokemon-type-item">
-                    {props.type}
+                    {/* {props.types} */}
                   </div>
-              {/* {props.types.map((type, id) => {
+              {props.types.map((type, id) => {
                 return (
                   <div className="pokemon-type-item" key={id}>
                     {type.type.name}
                   </div>
                 );
-              })} */}
+              })}
             </div>
             <svg
               className="pokeball"
