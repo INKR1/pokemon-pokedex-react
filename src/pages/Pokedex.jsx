@@ -3,7 +3,7 @@ import Pages from "../components/Pages";
 import Pokemons from "../components/Pokemons";
 import { getPokemons, getPokemonData } from "../data/api"
 
-export default function Pokedex() {
+export default function Pokedex(props) {
 
   const [loader, setLoader] = useState(true);
   const [loadedPokemons, setLoadedPokemons] = useState([]);
@@ -12,11 +12,11 @@ export default function Pokedex() {
 
   // useEffect(() => {
   //   setLoader(true);
-  //   fetch(`https://pokeapi.co/api/v2/pokemon?limit=9&offset=0`)
+  //   fetch(`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`)
   //   .then(res => res.json())
   //   .then(data => {
   //     const pokemons = [];
-  //     for (const key in data) {
+  //     for (const key in data.results) {
   //       const pokemon ={
   //         id: key,
   //         ...data[key]
@@ -47,6 +47,7 @@ export default function Pokedex() {
       }
     };
     fetchPokemons();
+
   }, [page]);
 
 

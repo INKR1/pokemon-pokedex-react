@@ -11,23 +11,18 @@ export default function PokemonWrapper(props) {
     if (pokemonIsFav) {
       favCtx.removeFromFavorites(props.id);
     } else {
-      favCtx.addToFavorites({
-        id: props.id,
-        name: props.name,
-        type: props.type,
-        // img: props.sprites
-        img: props.sprites.front_default,
-        // img2: props.sprites.front_shiny
-      });
+      favCtx.addToFavorites(props);
+       
     }
   }
-  
+  console.log("pav: " + props.img)
+  console.log(pokemonIsFav)
+
   return (
     <div className="pokemon-card">
         <div className="pokemon-img-container">
           <img
             alt={props.name}
-            // src={props.sprites}
             src={props.img}
             className="pokemon-img"
           />
@@ -45,8 +40,9 @@ export default function PokemonWrapper(props) {
           <div className="card-bottom">
             <div className="pokemon-type">
             <div className="pokemon-type-item">
-                    {/* {props.types} */}
+                    {/* {(props.types)} */}
                   </div>
+
               {props.types.map((type, id) => {
                 return (
                   <div className="pokemon-type-item" key={id}>
