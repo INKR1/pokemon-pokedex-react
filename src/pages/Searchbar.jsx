@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { searchForPokemon } from "../data/api.js";
 
-export default function Searchbar(props) {
+export default function Searchbar() {
   const [search, setSearch] = useState("ditto");
   const [pokemon, setPokemon] = useState();
   const [pokemonId, setPokemonId] = useState();
@@ -51,6 +51,7 @@ export default function Searchbar(props) {
             <div> Weight: {pokemon.weight} </div>
             <div> # {pokemon.id}</div>
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+            <div>{console.log(pokemon.sprites)}</div>
           </div>
         ) : (
           <h1> Oops.... Can't find that pokemon 🥺</h1>

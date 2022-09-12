@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import FavoritesContext from "../contexts/favPokemonContext"
-import Pokemon from "../components/PokemonWrapper"
+import Pokemons from "../components/Pokemons"
 
 export default function Favorites() {
 
@@ -12,11 +12,11 @@ export default function Favorites() {
   if(favCtx.favorites.length === 0) {
     content = <p>You got no favorites yet</p>
   } else {
-    content = <Pokemon favorites={favCtx.favorites} />
+    content = <Pokemons favorites={favCtx.favorites} />
 
   }
 
-  // console.log("favorites pokemons ID nr.: " + favorites);
+  // console.log("favorites pokemons ID nr.: " + content[0]);
 
   return (
     <div>

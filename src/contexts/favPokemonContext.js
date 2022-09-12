@@ -13,6 +13,7 @@ export function FavCtxProvider(props) {
     const [userFavPokemons, setUserFavPokemons] = useState([])
 
     function addFavoriteHandler(favoritePokemon) {
+        console.log(favoritePokemon)
         setUserFavPokemons(prevFavPokemon => {
             return prevFavPokemon.concat(favoritePokemon);
         });
