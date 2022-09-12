@@ -1,32 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import Pages from "../components/Pages";
-import Pokemons from "../components/Pokemons";
-import { getPokemons, getPokemonData } from "../data/api"
+import PokemonWrapper from "../components/PokemonWrapper";
+import { getPokemons, getPokemonData } from "../data/api";
 
 export default function Pokedex(props) {
-
   const [loader, setLoader] = useState(true);
   const [loadedPokemons, setLoadedPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-
-  // useEffect(() => {
-  //   setLoader(true);
-  //   fetch(`https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0`)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     const pokemons = [];
-  //     for (const key in data.results) {
-  //       const pokemon ={
-  //         id: key,
-  //         ...data[key]
-  //       };
-  //       pokemons.push(pokemon);
-  //     }
-  //     setLoader(false); 
-  //     setLoadedPokemons(pokemons);
-  //   });
-  // }, []);
 
   const pokemonsPerPage = 21;
 
@@ -38,7 +19,10 @@ export default function Pokedex(props) {
         const promises = data.results.map(
           async (pokemon) => await getPokemonData(pokemon.url)
         );
+        const pokemons = [];
         const results = await Promise.all(promises);
+        pokemons.push(results);
+        console.log(results);
         setLoadedPokemons(results);
         setLoader(false);
         setTotalPages(Math.ceil(data.count / pokemonsPerPage));
@@ -47,16 +31,17 @@ export default function Pokedex(props) {
       }
     };
     fetchPokemons();
-
   }, [page]);
 
-
-  if(loader) {
-    return <article><div className="pokemon"></div></article>
+  if (loader) {
+    return (
+      <article>
+        <div className="pokemon"></div>
+      </article>
+    );
   }
 
-
-// POKEDEX PAGES
+  // POKEDEX PAGES
   const clickedLeftHandler = () => {
     if (page > 0) {
       setPage(page - 1);
@@ -67,7 +52,6 @@ export default function Pokedex(props) {
       setPage(page + 1);
     }
   };
-
 
   return (
     <div>
@@ -80,11 +64,11 @@ export default function Pokedex(props) {
           clickedRight={clickedRightHandler}
         />
       </div>
-        <div className="pokedex-grid">
-                <Pokemons 
-                pokemons={loadedPokemons} 
-                />
-        </div>
+      <div className="pokedex-grid">
+        {loadedPokemons.map((pokemon, index) => (
+          <PokemonWrapper key={index} pokemon={pokemon} />
+        ))}
+      </div>
     </div>
   );
 }
