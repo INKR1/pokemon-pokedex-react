@@ -1,21 +1,36 @@
-import { useContext } from "react";
+import { useState, useEffect } from "react";
+// import { getFavPokemons } from "../data/api"
 
-import FavoritesContext from "../contexts/favPokemonContext"
+// import FavoritesContext from "../contexts/favPokemonContext"
 import PokemonWrapper from "../components/PokemonWrapper"
 
-export default function Favorites(props) {
 
-  const favCtx = useContext(FavoritesContext);
+export default function Favorites() {
 
-  let content;
+  const [pokemons, setPokemons] = useState([]);
+  
+  let favPokemonsStr = localStorage.getItem("favPokemons");
+  let favPokemonsSet = new Set(JSON.parse(favPokemonsStr));
+  if(favPokemonsSet === undefined) throw new Error("favPokemonsSet is undefined")
 
-  if(favCtx.favorites.length === 0) {
+  useEffect(() => {
+    async function fetchData(){
+      const pokeList = await getPokemonFromApi(favPokemonsSet);
+      setPokemons(pokeList);
+    }
+    fetchData();
+  },[]);
+
+   console.log(pokemons)
+let content = "";
+
+  if(pokemons.length === 0) {
     content = <p>You got no favorites yet</p>
   } else {
-     content =  //<Pokemons pokemons={favCtx.favorites} />
+     content =  //<Pokemons pokemons={pokemons} />
 <ul className="pokemon-list">
                 {/* {console.log(props.pokemons)} */}
-                {favCtx.favorites.map((pokemon, index) => (
+                {pokemons.map((pokemon, index) => (
                     <PokemonWrapper
                     key = {index}
                     pokemon = {pokemon}
@@ -24,8 +39,8 @@ export default function Favorites(props) {
             </ul>
   }
 
-  console.log("favorites pokemons: " + favCtx.favorites);
-  console.log("favorites content: " + content);
+  // console.log("favorites pokemons: " + favCtx.favorites);
+  // console.log("favorites content: " + content);
 
   return (
     <div>
@@ -34,3 +49,20 @@ export default function Favorites(props) {
     </div>
   );
 }
+
+async function getPokemonFromApi(pokemonIdList){
+    let dataList = [];
+    for(const id of pokemonIdList)
+    {
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      const data =  await res.json()
+      dataList.push(data);
+    }
+  
+    // pokemonIdList.forEach(async pokemonId => {
+    //   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+    //   const data =  await res.json()
+    //   dataList.push(data);
+    //   })
+      return dataList;
+    };
