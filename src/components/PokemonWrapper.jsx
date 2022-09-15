@@ -1,22 +1,9 @@
-import { useContext } from "react";
-import FavoritesContext from "../contexts/favPokemonContext";
-import SearchBar from "../pages/Searchbar"
+export default function PokemonWrapper({ pokemon, toggleFavStatus, likedPokemons }) {
 
-export default function PokemonWrapper({ pokemon }) {
-  const favCtx = useContext(FavoritesContext);
-
-  const pokemonIsFav = favCtx.pokemonIsFavorite(pokemon.id);
-
-  function toggleFavStatus() {
-    if (pokemonIsFav) {
-      favCtx.removeFromFavorites(pokemon.id);
-    } else {
-      favCtx.addToFavorites(pokemon);
-    }
-  }
-  // console.log("pav: " + pokemon.img)
-  // console.log(pokemonIsFav)
-
+  // console.log(likedPokemons)
+  // console.log("this is pokemons: " + pokemon)
+  // console.log(pokemon)
+  
   return (
     <div className="pokemon-card">
       <div className="pokemon-img-container">
@@ -50,14 +37,13 @@ export default function PokemonWrapper({ pokemon }) {
               );
             })}
           </div>
-          <svg className="pokeball" onClick={toggleFavStatus}>
+          <svg className="pokeball" onClick={() => toggleFavStatus(pokemon.id)}>
             <use
-              xlinkHref={pokemonIsFav ? "#likedPokeball" : "#pokeball"}
+              xlinkHref={likedPokemons ? "#likedPokeball" : "#pokeball"}
             ></use>
           </svg>
         </div>
       </div>
-      <SearchBar toggleFavorites={toggleFavStatus} pokemonIsFav={pokemonIsFav} />
     </div>
   );
 }
