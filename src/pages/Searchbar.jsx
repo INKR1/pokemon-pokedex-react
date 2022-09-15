@@ -1,11 +1,15 @@
 import React from "react";
+// import { useContext } from "react";
 import { useState } from "react";
 import { searchForPokemon } from "../data/api.js";
+// import FavoritesContext from "../contexts/favPokemonContext";
 
 export default function Searchbar() {
+
   const [search, setSearch] = useState("ditto");
   const [pokemon, setPokemon] = useState();
   const [pokemonId, setPokemonId] = useState();
+
 
   const onChangeHandler = (e) => {
     setSearch(e.target.value);
@@ -23,9 +27,11 @@ export default function Searchbar() {
   };
 
   const onIdSearchHandler = async (pokemonNumber) => {
-    const resultNumber = await searchForPokemon(pokemonNumber);
+    const resultNumber = await searchForPokemon(pokemonNumber.id);
     setPokemonId(resultNumber);
   };
+
+  console.log(`this is pokemon:` + pokemon)
 
   return (
     <div className="searchbar-wrapper">
@@ -51,7 +57,12 @@ export default function Searchbar() {
             <div> Weight: {pokemon.weight} </div>
             <div> # {pokemon.id}</div>
             <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-            <div>{console.log(pokemon.sprites)}</div>
+            <svg className="pokeball" onClick>
+            <use
+              xlinkHref={ "#likedPokeball"}
+              //  : "#pokeball"}
+            ></use>
+          </svg>
           </div>
         ) : (
           <h1> Oops.... Can't find that pokemon 🥺</h1>
