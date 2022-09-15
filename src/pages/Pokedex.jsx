@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Pages from "../components/Pages";
 import PokemonWrapper from "../components/PokemonWrapper";
 import { getPokemons, getPokemonData } from "../data/api";
@@ -8,9 +8,13 @@ export default function Pokedex(props) {
   const [loadedPokemons, setLoadedPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [likedPokemons, setLikedPokemons] = useState(new Set());
+  const change = useRef(false);
+  const loaded = useRef(false);
 
   const pokemonsPerPage = 21;
 
+  //FETCH POKEMON DATA IN POKEDEX
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
@@ -19,10 +23,8 @@ export default function Pokedex(props) {
         const promises = data.results.map(
           async (pokemon) => await getPokemonData(pokemon.url)
         );
-        const pokemons = [];
         const results = await Promise.all(promises);
-        pokemons.push(results);
-        console.log(results);
+        // console.log(results);
         setLoadedPokemons(results);
         setLoader(false);
         setTotalPages(Math.ceil(data.count / pokemonsPerPage));
@@ -33,6 +35,36 @@ export default function Pokedex(props) {
     fetchPokemons();
   }, [page]);
 
+// SAVE DATA IN LOCALSTORAGE as string
+  useEffect(() => {
+    if (loaded.current) {
+      localStorage.setItem("favPokemons", JSON.stringify([...likedPokemons]));
+      // localStorage.setItem("favPokemons", likedPokemons);
+    }
+    loaded.current = true;
+  }, [likedPokemons]);
+
+// local storage has string we need to deserialize it to set
+  useEffect(() => {
+    let l = localStorage.getItem("favPokemons");
+    console.log(l);
+    if (null === l) {
+      l = JSON.stringify([]);
+    }
+    l = JSON.parse(l);
+    setLikedPokemons(new Set(l));
+  }, []);
+
+// Toggle - ADD OR REMOVE FAVORITES
+  const toggleFavStatus = id => {
+        change.current = true;
+        const likedCopy = new Set(likedPokemons);
+        likedCopy.has(id) ? likedCopy.delete(id) : likedCopy.add(id);
+        setLikedPokemons(likedCopy);
+     }
+
+
+// LOADER
   if (loader) {
     return (
       <article>
@@ -40,6 +72,8 @@ export default function Pokedex(props) {
       </article>
     );
   }
+
+// console.log(loadedPokemons)
 
   // POKEDEX PAGES
   const clickedLeftHandler = () => {
@@ -52,6 +86,12 @@ export default function Pokedex(props) {
       setPage(page + 1);
     }
   };
+
+  // if(likedPokemons === true) {
+  //   let favorites = [];
+  //   favorites.push(loadedPokemons);
+  //   console.log(favorites)
+  // }
 
   return (
     <div>
@@ -66,7 +106,11 @@ export default function Pokedex(props) {
       </div>
       <div className="pokedex-grid">
         {loadedPokemons.map((pokemon, index) => (
-          <PokemonWrapper key={index} pokemon={pokemon} />
+          <PokemonWrapper 
+          key={index} 
+          pokemon={pokemon} 
+          toggleFavStatus={toggleFavStatus}
+          likedPokemons={likedPokemons.has(pokemon.id)}/>
         ))}
       </div>
     </div>
